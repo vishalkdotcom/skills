@@ -9,10 +9,9 @@ description: Entry point for the user's personal Obsidian vault. Use when creati
 
 | | |
 |---|---|
-| **WSL** | `/mnt/c/Users/vishal/OneDrive - Default Directory/Documents/Obsidian Vault` |
-| **Windows** | `C:\Users\vishal\OneDrive - Default Directory\Documents\Obsidian Vault` |
-
-Quote the path — it has spaces.
+| **WSL** | `/mnt/c/Users/vishal/vaults/obsidian` |
+| **Windows** | `C:\Users\vishal\vaults\obsidian` |
+| **Remote** | `git@github.com:vishalkdotcom/work-vault.git` (private; auto-synced via the `obsidian-git` plugin) |
 
 ## Conventions
 
