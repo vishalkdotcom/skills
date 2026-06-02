@@ -1,0 +1,26 @@
+# Skills to never install or sync from mattpocock/skills.
+# One name per line. Lines starting with # are ignored.
+
+# Removed — not used
+caveman
+design-an-interface
+zoom-out
+qa
+request-refactor-plan
+
+obsidian-vault
+
+# Explicitly not wanted from upstream
+git-guardrails-claude-code
+scaffold-exercises
+edit-article
+
+# in-progress (except teach)
+review
+writing-beats
+writing-fragments
+writing-shape
+
+# deprecated / misc not wanted
+ubiquitous-language
+migrate-to-shoehorn

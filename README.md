@@ -45,6 +45,7 @@ Configure each product to the same files if it uses a different directory (e.g. 
 ## Day-to-day workflow
 
 - Edit files under `skills/` (your editor can open the clone directly; if you use the symlink, edits are the same inode).
+- **Sync from [mattpocock/skills](https://github.com/mattpocock/skills):** see [UPSTREAM.md](./UPSTREAM.md). Run `./scripts/sync-upstream.sh --dry-run`, then `./scripts/sync-upstream.sh` when you want updates — usually only after Matt ships changes.
 - Commit when a skill change is in a good state:
 
   ```bash
