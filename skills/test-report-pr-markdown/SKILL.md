@@ -72,6 +72,7 @@ Bare image URLs do **not** resolve filenames via the API. Use the ShareX filenam
 
 ## Agent behavior
 
+- Always return the test-report markdown as **raw, copy-pasteable text inside a fenced code block** (never rendered) so `<details>`/`<summary>` tags are visible.
 - Run **`prepare-ticket-report`** (or equivalent steps) and return results directly — **do not ask the user to provide draft markdown**.
 - Always include the **Upload page** URL when derivable from git; user opens it for manual asset upload.
 - Prefer bundled scripts over reimplementing encode/title/API logic.
