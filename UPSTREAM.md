@@ -22,7 +22,7 @@ No local forks — all Matt skills match upstream unless you explicitly `--force
 
 ### Local-only (yours — never synced from Matt)
 
-`defuddle`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `test-report-pr-markdown`, `yaak-cli`
+`browser-demo-test`, `defuddle`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `test-report-pr-markdown`, `wovo-prototypes`, `yaak-cli`
 
 (`obsidian-vault` shares a name with Matt's personal skill but is **your** vault router — listed in `.upstream-exclude` so sync never overwrites it.)
 

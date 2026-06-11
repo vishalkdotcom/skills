@@ -18,7 +18,7 @@ Do not commit videos. Do not put app scenarios in harness repos.
 Copy `scripts/demo-template.ps1` or an example. Customize:
 
 1. `$outDir = $PSScriptRoot` (set by `run-windows-script.sh`)
-2. `open` → `resize 1920 1080` → `video-start` → `video-chapter` per beat
+2. `open` → `resize 1920 1080` → `video-start … --size=1920x1080` → `video-chapter` per beat
 3. Interact: `fill`, `click`, `goto`, `snapshot` / `screenshot` to `$outDir`
 4. Assert: `playwright-cli eval` + `Get-PlaywrightResult` from `parse-playwright-result.ps1`
 5. `video-stop` → `close-all` → print `SCENARIO_OK` or throw
@@ -53,3 +53,4 @@ PR path: HandBrake encode → `test-report-pr-markdown`.
 | `run-windows-script.sh`       | Copy `.ps1` to `Videos/<slug>/` and run |
 | `demo-template.ps1`           | 1080p skeleton                          |
 | `parse-playwright-result.ps1` | Parse `### Result` from eval output     |
+| `verify-video-resolution.sh`  | `ffprobe` check encoded width×height    |

@@ -12,7 +12,7 @@ New-Item -ItemType Directory -Force -Path $outDir | Out-Null
 playwright-cli close-all 2>$null
 playwright-cli open $startUrl --browser=chromium
 playwright-cli resize 1920 1080
-playwright-cli video-start $videoFile
+playwright-cli video-start $videoFile --size=1920x1080
 playwright-cli video-chapter 'Start' --description='Opening scenario entry point'
 
 # --- scenario steps ---

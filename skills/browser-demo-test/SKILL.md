@@ -11,7 +11,7 @@ allowed-tools: Bash(playwright-cli:*) Bash(pwsh.exe:*) Bash(npx:*) Bash(npm:*)
 | Setting      | Value                                                                   |
 | ------------ | ----------------------------------------------------------------------- |
 | Automation   | Windows `pwsh` + `playwright-cli --browser=chromium` (not WSL/WSLg)     |
-| Video        | `resize 1920 1080` before `video-start`                                 |
+| Video        | `resize 1920 1080` + `video-start … --size=1920x1080`                   |
 | Artifacts    | `C:\Users\vishal\Videos\<scenario-slug>\` — scripts in git, videos not  |
 | XLSX preview | `~/repos/xlsx-viewer` on **8765** — start only for export-preview beats |
 
@@ -29,7 +29,7 @@ bash "$SKILL/scripts/run-windows-script.sh" wovo-questionnaire-report \
 1. **Intake** — slug, URL, assertions, whether video/xlsx-viewer beat is needed. Confirm app is up.
 2. **Author** — copy `scripts/demo-template.ps1` or `scripts/examples/`. See [REFERENCE.md](REFERENCE.md).
 3. **Run** — shell subagent: `run-windows-script.sh <slug> <path-to.ps1>`.
-4. **Report** — pass/fail, video path + size, artifact paths. PR: `test-report-pr-markdown`.
+4. **Report** — pass/fail, video path + size, `verify-video-resolution.sh`, artifact paths. PR: `test-report-pr-markdown`.
 
 ## Guardrails
 

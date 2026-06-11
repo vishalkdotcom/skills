@@ -4,12 +4,15 @@ Capture browser automation sessions as video for debugging, documentation, or ve
 
 ## Basic Recording
 
+`resize` sets the browser viewport. **`video-start --size` sets the encoded frame** — without `--size`, output defaults to ~800×450 even at a 1920×1080 viewport.
+
 ```bash
 # Open browser first
 playwright-cli open
 
-# Start recording
-playwright-cli video-start demo.webm
+# Match viewport and encoded frame for 1080p
+playwright-cli resize 1920 1080
+playwright-cli video-start demo.webm --size=1920x1080
 
 # Add a chapter marker for section transitions
 playwright-cli video-chapter "Getting Started" --description="Opening the homepage" --duration=2000
@@ -32,10 +35,19 @@ playwright-cli video-stop
 ### 1. Use Descriptive Filenames
 
 ```bash
-# Include context in filename
-playwright-cli video-start recordings/login-flow-2024-01-15.webm
-playwright-cli video-start recordings/checkout-test-run-42.webm
+# Include context in filename; always pass --size for demos
+playwright-cli video-start recordings/login-flow-2024-01-15.webm --size=1920x1080
+playwright-cli video-start recordings/checkout-test-run-42.webm --size=1920x1080
 ```
+
+### 1b. Verify encoded resolution
+
+```bash
+ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 demo.webm
+# expect: 1920,1080
+```
+
+Or use `browser-demo-test/scripts/verify-video-resolution.sh` after a demo run.
 
 ### 2. Record entire hero scripts.
 

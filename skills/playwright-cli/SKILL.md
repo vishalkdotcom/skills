@@ -1,6 +1,6 @@
 ---
 name: playwright-cli
-description: Automate browser interactions, test web pages and work with Playwright tests.
+description: Automates browser sessions with playwright-cli (navigation, snapshots, video, tracing). Use when driving playwright-cli, recording demo or QA videos, browser smoke tests, or debugging with snapshots and traces.
 allowed-tools: Bash(playwright-cli:*) Bash(npx:*) Bash(npm:*)
 ---
 
@@ -159,7 +159,7 @@ playwright-cli run-code "async page => await page.context().grantPermissions(['g
 playwright-cli run-code --filename=script.js
 playwright-cli tracing-start
 playwright-cli tracing-stop
-playwright-cli video-start video.webm
+playwright-cli video-start video.webm --size=1920x1080
 playwright-cli video-chapter "Chapter Title" --description="Details" --duration=2000
 playwright-cli video-stop
 
