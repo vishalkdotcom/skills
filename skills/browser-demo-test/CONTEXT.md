@@ -2,19 +2,22 @@
 
 ## Language
 
-**Scenario**: PowerShell script that drives a browser flow with assertions and optional video.  
-_Avoid_: test script, demo script
+**Scenario**: Folder under `wovo-browser-qa/scenarios/` with `run.ps1` (+ `flow.js` for Tier B).  
+_Avoid_: test script in app repo
 
-**Scenario slug**: Kebab-case folder under `C:\Users\vishal\Videos\` (e.g. `wpm-3370-questionnaire-export`).  
+**Scenario repo**: `~/repos/wovo-browser-qa` — version-controlled Playwright CLI scenarios.  
+_Avoid_: `wovo_frontend/scripts/browser-demo/`, vault ticket folders
+
+**Tier B screencast**: `run-code` + `flow.js` using `page.screencast.showChapter` / `showOverlay` / `showActions`.  
+_Avoid_: CLI-only video without AC overlays (Tier A) for PR-facing demos
+
+**Scenario slug**: Kebab-case folder under `C:\Users\vishal\Videos\` (e.g. `wpm-3452-qa-signoff`).  
 _Avoid_: test name, run id
 
-**Template** / **Example**: Generic skeleton (`demo-template.ps1`) vs ready-to-run product script (`scripts/examples/`).  
-_Avoid_: Using interchangeably
+**AC card**: `showChapter` beat displaying acceptance criterion text before interactions.  
+_Avoid_: video-chapter (metadata-only; insufficient for PR reviewers)
 
-**Harness**: Local tool started only for steps that need it (e.g. xlsx-viewer).  
+**Harness**: Skill scripts (`run-windows-script.sh`) + local tools started only when needed (e.g. xlsx-viewer).  
 _Avoid_: fixture, test server
 
-**Beat**: Recorded segment marked with `video-chapter`.  
-_Avoid_: step (in video context)
-
-**Scenario script**: `.ps1` in git. **Artifact directory**: run output under `Videos/<slug>/`, never in git. **PR evidence**: flat `Wpm-*.mp4` for `test-report-pr-markdown`.
+**Scenario script**: `.ps1` + `.js` in git. **Artifact directory**: run output under `Videos/<slug>/`, never in git. **PR evidence**: flat `Wpm-*.mp4` for `test-report-pr-markdown`. **Vault evidence**: markdown in ticket `evidence/`, links to scenario repo.

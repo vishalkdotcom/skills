@@ -1,34 +1,32 @@
 $ErrorActionPreference = 'Stop'
 
-# --- customize ---
-$startUrl = 'http://localhost:3001/next/login'
-$outDir = $PSScriptRoot   # run-windows-script.sh copies this file to Videos/<slug>/run.ps1
+# Tier B template — pair with demo-template-flow.js (copy both to wovo-browser-qa/scenarios/<slug>/).
+$outDir = $PSScriptRoot
 $videoFile = Join-Path $outDir 'demo.webm'
-# --- end customize ---
+$flowFile = Join-Path $outDir 'flow.js'
+
+if (-not (Test-Path $flowFile)) {
+  throw "Missing flow.js beside run.ps1. Copy scripts/demo-template-flow.js as flow.js"
+}
 
 New-Item -ItemType Directory -Force -Path $outDir | Out-Null
-. (Join-Path $PSScriptRoot 'parse-playwright-result.ps1')
+
+$env:DEMO_VIDEO_PATH = $videoFile
+$env:DEMO_LOGIN_URL = if ($env:DEMO_LOGIN_URL) { $env:DEMO_LOGIN_URL } else { 'http://localhost:3001/next/login' }
 
 playwright-cli close-all 2>$null
-playwright-cli open $startUrl --browser=chromium
-playwright-cli resize 1920 1080
-playwright-cli video-start $videoFile --size=1920x1080
-playwright-cli video-chapter 'Start' --description='Opening scenario entry point'
+playwright-cli run-code --filename="$flowFile"
 
-# --- scenario steps ---
-# playwright-cli fill 'input[name="username"]' $env:WOVO_TEST_USER
-# playwright-cli goto 'http://localhost:3001/next/...'
-Start-Sleep -Seconds 3
-# --- end steps ---
+if (-not (Test-Path $videoFile)) {
+  throw "Video not produced: $videoFile"
+}
 
-playwright-cli snapshot --filename="$outDir\snapshot.yml"
-playwright-cli screenshot --filename="$outDir\screenshot.png"
-
-$title = Get-PlaywrightResult -RawOutput ((playwright-cli eval 'document.title' | Out-String).Trim())
-
-playwright-cli video-stop
-playwright-cli close-all
-
-Write-Output "title=$title"
+$size = (Get-Item $videoFile).Length
 Write-Output "video=$videoFile"
+Write-Output "videoBytes=$size"
+
+if ($size -lt 100000) {
+  throw "Video suspiciously small ($size bytes) — check screencast size 1920x1080"
+}
+
 Write-Output 'SCENARIO_OK'

@@ -2,55 +2,51 @@
 
 ## What lives where
 
-| Location                                     | In git? | Purpose                                  |
-| -------------------------------------------- | ------- | ---------------------------------------- |
-| `scripts/demo-template.ps1`                  | Yes     | Template for new scenarios               |
-| `scripts/examples/*.ps1`                     | Yes     | Product-specific examples                |
-| Feature repo `scripts/`                      | Yes     | Ticket-specific scenario scripts         |
-| `~/repos/xlsx-viewer/scripts/smoke-test.ps1` | Yes     | Harness smoke test only                  |
-| `C:\Users\vishal\Videos\<slug>\`             | No      | Run artifacts per execution              |
-| `C:\Users\vishal\Videos\Wpm-*.mp4`           | No      | PR encodes for `test-report-pr-markdown` |
+| Location | In git? | Purpose |
+| --- | --- | --- |
+| `~/repos/wovo-browser-qa/scenarios/<slug>/` | Yes | Ticket scenarios (`run.ps1` + `flow.js`) |
+| `~/repos/wovo-browser-qa/lib/` | Yes | Shared screencast helpers |
+| `browser-demo-test/scripts/` | Yes (skills repo) | Harness only — run, check, verify |
+| Obsidian vault `qa-plan.md` | Yes (vault) | AC source of truth |
+| Obsidian vault `evidence/` | Yes (vault) | Pass/fail log + artifact paths |
+| `C:\Users\vishal\Videos\<slug>\` | No | Run output per execution |
+| `C:\Users\vishal\Videos\Wpm-*.mp4` | No | PR encodes for `test-report-pr-markdown` |
 
-Do not commit videos. Do not put app scenarios in harness repos.
+Do not commit videos. Do not put scenario scripts in `wovo_frontend/next/` or the vault.
 
-## Authoring a scenario
+## Authoring a Tier B scenario
 
-Copy `scripts/demo-template.ps1` or an example. Customize:
+1. Copy `wovo-browser-qa/scenarios/demo/` to `scenarios/<slug>/`.
+2. Map each AC from vault `qa-plan.md` to `showChapter` in `flow.js`.
+3. Set env in `run.ps1` (`DEMO_VIDEO_PATH`, URLs, credentials).
+4. Assert in `flow.js`; `run.ps1` verifies video file + prints `SCENARIO_OK`.
 
-1. `$outDir = $PSScriptRoot` (set by `run-windows-script.sh`)
-2. `open` → `resize 1920 1080` → `video-start … --size=1920x1080` → `video-chapter` per beat
-3. Interact: `fill`, `click`, `goto`, `snapshot` / `screenshot` to `$outDir`
-4. Assert: `playwright-cli eval` + `Get-PlaywrightResult` from `parse-playwright-result.ps1`
-5. `video-stop` → `close-all` → print `SCENARIO_OK` or throw
+See [tier-b-screencast.md](references/tier-b-screencast.md).
 
-Credentials: prefer env vars (`WOVO_TEST_USER`, `WOVO_TEST_PASSWORD` — see examples).
-
-**Excel export beat:** `npm start` in `~/repos/xlsx-viewer`, then `tab-new` to `http://localhost:8765/viewer.html?file=...`. Stop server when done.
+**Legacy Tier A** (CLI-only `.ps1` without `flow.js`): still runs, but migrate to Tier B before PR re-records.
 
 ## Execute
 
-Parent plans; shell subagent runs:
-
 ```bash
-bash "$HOME/.agents/skills/browser-demo-test/scripts/run-windows-script.sh" <slug> <path-to.ps1>
+bash "$HOME/.agents/skills/browser-demo-test/scripts/run-windows-script.sh" <slug> <path-to/run.ps1>
 ```
 
-Return: pass/fail, video path + size, snapshot paths (read YAML from disk), console errors.
+`run-windows-script.sh` copies `run.ps1`, sibling `*.js`, `lib/`, and `parse-playwright-result.ps1` into `Videos/<slug>/`.
+
+Return: pass/fail, video path + size, snapshot paths, console errors.
 
 ## Report
 
 - Pass/fail and what was verified
-- Video path + size ([video-quality.md](references/video-quality.md) sanity checks)
-- Blocking vs noise console errors (404s on non-critical APIs may be noise)
+- Video path + size ([video-quality.md](references/video-quality.md))
+- Vault evidence note with script path + run command
+- PR path: HandBrake encode → `test-report-pr-markdown`
 
-PR path: HandBrake encode → `test-report-pr-markdown`.
+## Bundled harness scripts
 
-## Bundled scripts
-
-| Script                        | Purpose                                 |
-| ----------------------------- | --------------------------------------- |
-| `check-prerequisites.sh`      | `curl` app + `playwright-cli --version` |
-| `run-windows-script.sh`       | Copy `.ps1` to `Videos/<slug>/` and run |
-| `demo-template.ps1`           | 1080p skeleton                          |
-| `parse-playwright-result.ps1` | Parse `### Result` from eval output     |
-| `verify-video-resolution.sh`  | `ffprobe` check encoded width×height    |
+| Script | Purpose |
+| --- | --- |
+| `check-prerequisites.sh` | `curl` app + `playwright-cli --version` |
+| `run-windows-script.sh` | Copy scenario + run via Windows `pwsh` |
+| `parse-playwright-result.ps1` | Parse `### Result` from eval output (Tier A) |
+| `verify-video-resolution.sh` | `ffprobe` 1080p check |
