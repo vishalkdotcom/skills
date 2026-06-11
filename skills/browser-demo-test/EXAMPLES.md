@@ -6,7 +6,7 @@ All scenarios live in `~/repos/wovo-browser-qa/scenarios/`.
 | --- | --- | --- |
 | `demo/` | B | Login page loads with AC card + pass badge |
 | `wovo-questionnaire-report/` | B | Dev login → questionnaire report grid with AC overlays |
-| `wpm-3452-qa-signoff/` | A → B | Full WPM-3452 revert QA (migrate to Tier B on re-record) |
+| `wpm-3452-qa-signoff/` | B | Full WPM-3452 revert QA (7 ACs + draft rule) |
 
 ```bash
 SKILL="$HOME/.agents/skills/browser-demo-test"
