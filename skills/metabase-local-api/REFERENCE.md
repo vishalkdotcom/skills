@@ -40,12 +40,12 @@ Set these in your shell profile (e.g. Fish `set -gx` in `config.fish`), `export`
 
 **Recommended (Fish + Cursor agent):** keep **`MB_LOCAL_API_KEY`** in **`~/.config/secrets/metabase.env`** (single `KEY='value'` line, **`chmod 600`**). Source it from **`~/.profile`** and **`~/.bashrc`** (before bash’s interactive-only early exit) with `set -a; . …; set +a`, and **`export BASH_ENV="$HOME/.config/secrets/metabase.bash_env"`** so **non-interactive `bash -c`** (how many agents run) still loads the key. Fish should **`set -gx BASH_ENV`** to the same path so subprocess bash inherits it.
 
-| Variable               | Purpose                                             |
-| ---------------------- | --------------------------------------------------- |
-| `MB_LOCAL_API_KEY`     | Metabase API key (`X-API-Key`)                      |
-| `MB_METABASE_BASE_URL` | Full base, e.g. `http://172.29.48.1:7000`           |
-| `MB_METABASE_HOST`     | Host only; combine with `MB_METABASE_PORT`          |
-| `MB_METABASE_PORT`     | Default often `3000` or `7000` depending on install |
+| Variable               | Purpose                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------- |
+| `MB_LOCAL_API_KEY`     | Metabase API key (`X-API-Key`)                                                                    |
+| `MB_METABASE_BASE_URL` | **Required from WSL.** Full base, e.g. `http://172.29.48.1:7000` (Windows host IP, not localhost) |
+| `MB_METABASE_HOST`     | Host only; combine with `MB_METABASE_PORT`                                                        |
+| `MB_METABASE_PORT`     | Default often `3000` or `7000` depending on install                                               |
 
 **Skill helper:** `uv run "$HOME/.agents/skills/metabase-local-api/scripts/metabase_collections_cards.py"` (lists collections and cards; PEP 723 / stdlib).
 

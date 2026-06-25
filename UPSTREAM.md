@@ -22,15 +22,17 @@ No local forks — all Matt skills match upstream unless you explicitly `--force
 
 ### Local-only (yours — never synced from Matt)
 
-`browser-demo-test`, `defuddle`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `test-report-pr-markdown`, `wovo-prototypes`, `yaak-cli`
+`browser-demo-test`, `defuddle`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `test-report-pr-markdown`, `yaak-cli`
 
 Scenario scripts (Tier B `run.ps1` + `flow.js`) live in the separate **`~/repos/wovo-browser-qa`** repo — not in this skills tree.
 
 (`obsidian-vault` shares a name with Matt's personal skill but is **your** vault router — listed in `.upstream-exclude` so sync never overwrites it.)
 
-### Removed / excluded (will not be installed)
+### Removed / archived (will not be installed)
 
 Listed in [`.upstream-exclude`](./.upstream-exclude): removed skills, `obsidian-vault`, `git-guardrails-claude-code`, `scaffold-exercises`, `edit-article`, in-progress skills except `teach`, etc.
+
+**Archived locally:** `wovo-prototypes` — skill at `archive/wovo-prototypes/`; repo at `~/repos/archive/wovo-prototypes/` (2025-06-25).
 
 ## Sync workflow
 

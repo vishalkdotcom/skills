@@ -6,10 +6,10 @@ PR-quality demo videos: acceptance criteria on screen, visible interactions, pas
 
 Each scenario folder in `~/repos/wovo-browser-qa/scenarios/<slug>/`:
 
-| File | Role |
-|------|------|
+| File      | Role                                                                    |
+| --------- | ----------------------------------------------------------------------- |
 | `run.ps1` | Set env vars, invoke `run-code`, verify video size, print `SCENARIO_OK` |
-| `flow.js` | `async page => { … }` — screencast, navigation, assertions, overlays |
+| `flow.js` | `async page => { … }` — screencast, navigation, assertions, overlays    |
 
 Vault `qa-plan.md` is the AC source of truth. Copy criterion text into `showChapter` descriptions.
 
@@ -19,21 +19,30 @@ Vault `qa-plan.md` is the AC source of truth. Copy criterion text into `showChap
 
 ```js
 async (page) => {
-  const videoPath = '__DEMO_VIDEO_PATH__';
+  const videoPath = "__DEMO_VIDEO_PATH__";
 
   const showAc = async (title, description) => {
     await page.screencast.showChapter(title, { description, duration: 2500 });
   };
 
-  await page.screencast.start({ path: videoPath, size: { width: 1920, height: 1080 } });
-  await page.screencast.showActions({ duration: 800, position: 'top-right', cursor: 'pointer' });
+  await page.screencast.start({
+    path: videoPath,
+    size: { width: 1920, height: 1080 },
+  });
+  await page.screencast.showActions({
+    duration: 800,
+    position: "top-right",
+    cursor: "pointer",
+  });
 
-  await showAc('AC1: …', 'Given …, when …, then …');
+  await showAc("AC1: …", "Given …, when …, then …");
   // actions + assertions
-  await page.screencast.showOverlay(`<div style="…">✓ Expected outcome</div>`, { duration: 2000 });
+  await page.screencast.showOverlay(`<div style="…">✓ Expected outcome</div>`, {
+    duration: 2000,
+  });
 
   await page.screencast.stop();
-}
+};
 ```
 
 ## run.ps1 skeleton
@@ -57,14 +66,24 @@ Write-Output 'SCENARIO_OK'
 
 ## Overlay APIs
 
-| API | Use |
-|-----|-----|
-| `showChapter(title, { description, duration })` | Full-screen AC card before each beat |
-| `showOverlay(html, { duration? })` | Pass/fail badge; sticky if no duration |
-| `showActions({ duration, position, cursor })` | Highlight clicks + synthetic pointer |
-| `pressSequentially(text, { delay: 50 })` | Readable typing |
+| API                                             | Use                                    |
+| ----------------------------------------------- | -------------------------------------- |
+| `showChapter(title, { description, duration })` | Full-screen AC card before each beat   |
+| `showOverlay(html, { duration? })`              | Pass/fail badge; sticky if no duration |
+| `showActions({ duration, position, cursor })`   | Highlight clicks + synthetic pointer   |
+| `pressSequentially(text, { delay: 50 })`        | Readable typing                        |
 
 Overlays are `pointer-events: none` — safe during clicks.
+
+### Clicks and hovers must use Playwright locators
+
+`page.evaluate(() => el.click())` **does not** trigger `showActions` highlights — viewers see no pointer. Call `showActions` **before each** interaction (not once at start; `duration` expires).
+
+Pattern (paste from `screencast-helpers.js`):
+
+1. `highlightCallout(locator, 'ACn — VIEW REPORT on …')` — amber ring + blue label on target
+2. `annotatedClick(locator, label)` — `showActions` + highlight + `locator.click()`
+3. `annotatedHover(locator, label)` — for disabled tiles / `PermissionDeniedTooltip` (AC5); hold 4s so MUI tooltip appears; optionally ring `[role="tooltip"]`
 
 ## Helpers
 
@@ -72,11 +91,11 @@ Copy patterns from `~/repos/wovo-browser-qa/lib/screencast-helpers.js` into `flo
 
 ## Exemplars
 
-| Scenario | Tier |
-|----------|------|
-| `wovo-browser-qa/scenarios/demo/` | B — minimal login page |
-| `wovo-browser-qa/scenarios/wovo-questionnaire-report/` | B — login + report grid |
-| `wovo-browser-qa/scenarios/wpm-3452-qa-signoff/` | B — full AC sign-off (7 ACs + draft rule) |
+| Scenario                                               | Tier                                      |
+| ------------------------------------------------------ | ----------------------------------------- |
+| `wovo-browser-qa/scenarios/demo/`                      | B — minimal login page                    |
+| `wovo-browser-qa/scenarios/wovo-questionnaire-report/` | B — login + report grid                   |
+| `wovo-browser-qa/scenarios/wpm-3452-qa-signoff/`       | B — full AC sign-off (7 ACs + draft rule) |
 
 ## Probe then convert
 

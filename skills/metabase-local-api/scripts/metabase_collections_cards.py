@@ -6,8 +6,8 @@
 """List Metabase collections and cards from WSL when Metabase runs on Windows.
 
 Reads MB_LOCAL_API_KEY from the environment only (shell profile, direnv, CI secrets).
-Discovers a working base URL by probing localhost then Windows host IPs (default gateway /
-resolv.conf).
+Discovers a working base URL by probing Windows host IPs (default gateway / resolv.conf)
+before localhost. Set MB_METABASE_BASE_URL to skip probing.
 
 Shipped with the metabase-local-api skill. Example:
 
@@ -32,11 +32,11 @@ from urllib.request import Request, urlopen
 
 
 def windows_host_candidates() -> list[str]:
+    """Hosts to probe. Windows host IP first — localhost last (WSL ≠ Windows Metabase)."""
     hosts: list[str] = []
     env_host = os.environ.get("MB_METABASE_HOST") or os.environ.get("METABASE_HOST")
     if env_host:
         hosts.append(env_host.strip())
-    hosts.extend(["127.0.0.1", "localhost"])
     try:
         out = subprocess.check_output(
             ["ip", "route", "show", "default"],
@@ -56,6 +56,7 @@ def windows_host_candidates() -> list[str]:
             hosts.append(m.group(1))
     except OSError:
         pass
+    hosts.extend(["127.0.0.1", "localhost"])
     seen: set[str] = set()
     uniq: list[str] = []
     for h in hosts:
