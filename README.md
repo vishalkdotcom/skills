@@ -35,7 +35,7 @@ Runtime expects:
 
    ```bash
    ls -la ~/.agents/skills
-   test -f ~/.agents/skills/write-a-skill/SKILL.md && echo OK
+   test -f ~/.agents/skills/grilling/SKILL.md && echo OK
    ```
 
 ### Other tools

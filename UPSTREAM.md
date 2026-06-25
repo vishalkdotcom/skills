@@ -14,11 +14,24 @@ Use **this repo** when you want Git history, local forks, and custom skills in o
 
 ## Skill inventory
 
-### From Matt (sync as-is with `./scripts/sync-upstream.sh`)
+### From Matt (sync with `./scripts/sync-upstream.sh`)
 
-`diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `to-issues`, `to-prd`, `triage`, `write-a-skill`
+`ask-matt`, `codebase-design`, `decision-mapping`, `diagnosing-bugs`, `domain-modeling`, `grill-me`, `grill-with-docs`, `grilling`, `handoff`, `implement`, `improve-codebase-architecture`, `loop-me`, `prototype`, `resolving-merge-conflicts`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `to-issues`, `to-prd`, `triage`, `writing-great-skills`
 
 No local forks — all Matt skills match upstream unless you explicitly `--force` a one-off experiment.
+
+**Composable stacks (Jun 2026 refactor):**
+
+- `/grill-with-docs` → runs `/grilling` + `/domain-modeling`
+- `/improve-codebase-architecture` → uses `/codebase-design` vocabulary
+- `/ask-matt` → router over user-invoked skills
+
+**Upstream renames (sync script does not auto-migrate — handle manually):**
+
+| Old name | New name |
+| --- | --- |
+| `diagnose` | `diagnosing-bugs` |
+| `write-a-skill` | `writing-great-skills` |
 
 ### Local-only (yours — never synced from Matt)
 
@@ -30,9 +43,9 @@ Scenario scripts (Tier B `run.ps1` + `flow.js`) live in the separate **`~/repos/
 
 ### Removed / archived (will not be installed)
 
-Listed in [`.upstream-exclude`](./.upstream-exclude): removed skills, `obsidian-vault`, `git-guardrails-claude-code`, `scaffold-exercises`, `edit-article`, in-progress skills except `teach`, etc.
+Listed in [`.upstream-exclude`](./.upstream-exclude): removed skills, `obsidian-vault`, `git-guardrails-claude-code`, `scaffold-exercises`, `edit-article`, in-progress skills except `teach`, `decision-mapping`, and `loop-me`, etc.
 
-**Archived locally:** `wovo-prototypes` — skill at `archive/wovo-prototypes/`; repo at `~/repos/archive/wovo-prototypes/` (2025-06-25).
+**Archived locally:** see [archive/README.md](./archive/README.md).
 
 ## Sync workflow
 
