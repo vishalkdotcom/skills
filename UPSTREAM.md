@@ -35,7 +35,7 @@ No local forks — all Matt skills match upstream unless you explicitly `--force
 
 ### Local-only (yours — never synced from Matt)
 
-`browser-demo-test`, `defuddle`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
+`browser-demo-test`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
 
 Scenario scripts (Tier B `run.ps1` + `flow.js`) live in the separate **`~/repos/wovo-browser-qa`** repo — not in this skills tree.
 
