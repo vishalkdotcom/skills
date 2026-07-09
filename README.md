@@ -42,6 +42,20 @@ Runtime expects:
 
 Configure each product to the same files if it uses a different directory (e.g. Claude). Prefer another symlink to `…/repo/skills` rather than duplicating folders.
 
+### Windows (native clone — not a WSL mount)
+
+Keep a **second clone on NTFS** so Windows Cursor/agents never read skills over `\\wsl$\`. Do **not** junction to the WSL filesystem.
+
+In **Windows** PowerShell / pwsh:
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\repos" | Out-Null
+git clone https://github.com/vishalkdotcom/skills.git "$env:USERPROFILE\repos\skills"
+pwsh -File "$env:USERPROFILE\repos\skills\scripts\setup-windows-agents-link.ps1"
+```
+
+That backs up any existing `%USERPROFILE%\.agents\skills` folder and creates a junction to the clone’s `skills\` tree. Day-to-day: `git pull` in `C:\Users\vishal\repos\skills` after you push from WSL.
+
 ## Day-to-day workflow
 
 - Edit files under `skills/` (your editor can open the clone directly; if you use the symlink, edits are the same inode).
