@@ -16,11 +16,13 @@ git-guardrails-claude-code
 scaffold-exercises
 edit-article
 
-# in-progress (except teach)
-review
+# in-progress (except teach, loop-me)
+# review was renamed upstream to code-review (now synced)
 writing-beats
 writing-fragments
 writing-shape
+wizard
+claude-handoff
 
 # deprecated / misc not wanted
 ubiquitous-language
