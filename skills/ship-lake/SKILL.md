@@ -7,13 +7,13 @@ description: Ship merge-ready WPM slices in click-lake — implement, tight vali
 
 Use `uv run`. Follow `.cursorrules` for dbt layers and PeerDB. No unit-test gate — suggest `dbt test` for the user; do not run dbt commands directly.
 
-Merge-ready tail gates: read [`ship-core/REFERENCE.md`]($HOME/.agents/skills/ship-core/REFERENCE.md) before Review and before any branch or commit request.
+Merge-ready gates: read [`ship-core/REFERENCE.md`]($HOME/.agents/skills/ship-core/REFERENCE.md) before Understand (active branch), Review, and any branch or commit request.
 
 ## 1. Understand
 
 Read PRD/vault ticket first (`docs/agents/issue-tracker.md`, `CONTEXT.md` when present). Not ticket-ready → `/triage`, `/wayfinder`, or `/grill-with-docs`.
 
-**Done when:** spec read; on `vishalk/wpm-xxxx-…` from `master` with matching ticket key (wrong-branch WIP moved per ship-core).
+**Done when:** spec read; on the ticket’s **active branch** for this repo (resolve per ship-core; base `master`).
 
 ## 2. Plan
 

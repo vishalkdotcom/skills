@@ -7,13 +7,13 @@ description: Ship merge-ready WPM slices in wovo-django — red implement, tight
 
 Use **`uv run`**. Only WOVO repo with a unit-test gate in ship.
 
-Merge-ready tail gates: read [`ship-core/REFERENCE.md`]($HOME/.agents/skills/ship-core/REFERENCE.md) before Review and before any branch or commit request.
+Merge-ready gates: read [`ship-core/REFERENCE.md`]($HOME/.agents/skills/ship-core/REFERENCE.md) before Understand (active branch), Review, and any branch or commit request.
 
 ## 1. Understand
 
 Read PRD/spec first. Vault tickets: `docs/agents/issue-tracker.md`. Read `CONTEXT.md` and ADRs in the touched area. Not ticket-ready → `/triage`, `/wayfinder`, or `/grill-with-docs`.
 
-**Done when:** spec read; on `vishalk/wpm-xxxx-…` from `dev` with matching ticket key (wrong-branch WIP moved per ship-core).
+**Done when:** spec read; on the ticket’s **active branch** for this repo (resolve per ship-core).
 
 ## 2. Plan
 
