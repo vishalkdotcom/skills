@@ -42,10 +42,6 @@ grill-with-docs → to-spec → to-tickets → implement → code-review
 | `decision-mapping`  | `wayfinder`            |
 | `review`            | `code-review`          |
 
-### Third-party (not from Matt — never synced by `sync-upstream.sh`)
-
-`grilling-frontend-prototyping` — from [will-ness-ai/skills](https://github.com/will-ness-ai/skills/tree/main/skills/engineering/grilling-frontend-prototyping) (pairs with `/grilling` + `/prototype`).
-
 ### Local-only (yours — never synced from Matt)
 
 `browser-demo-test`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
