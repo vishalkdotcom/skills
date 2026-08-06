@@ -1,6 +1,6 @@
 # Upstream skill sync
 
-This repo is a **personal skills library**: a flat `skills/<name>/` tree symlinked at `~/.agents/skills`. Most engineering/productivity skills originate from [mattpocock/skills](https://github.com/mattpocock/skills); the rest are local-only.
+This repo is a **personal skills library**: a flat `skills/<name>/` tree. On Windows, `~/.agents/skills` is a folder of **per-skill junctions** built by `scripts/setup-windows-agents-link.ps1` (honors [`.agents-runtime-exclude`](./.agents-runtime-exclude)). Most engineering/productivity skills originate from [mattpocock/skills](https://github.com/mattpocock/skills); the rest are local-only.
 
 ## Source of truth
 

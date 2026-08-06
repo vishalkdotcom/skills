@@ -1,0 +1,13 @@
+# Skills kept in skills/ but omitted from ~/.agents/skills by setup-windows-agents-link.ps1.
+# One name per line. Lines starting with # are ignored.
+
+browser-demo-test
+metabase-local-api
+obsidian-vault
+ship-core
+ship-cra
+ship-django
+ship-lake
+ship-next
+test-report-pr-markdown
+yaak-cli

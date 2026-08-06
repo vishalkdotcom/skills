@@ -1,0 +1,14 @@
+---
+description: Relink ~/.agents/skills via the selective setup script; expect a folder of per-skill junctions
+alwaysApply: true
+---
+
+# Agents skills runtime link
+
+`~/.agents/skills` is a folder of **per-skill** junctions into this repo's `skills/<name>/`. Relink only with:
+
+```powershell
+pwsh -File scripts/setup-windows-agents-link.ps1
+```
+
+That script reads [`.agents-runtime-exclude`](../../.agents-runtime-exclude) and links every other skill that has a `SKILL.md`. A non-reparse parent folder is the expected shape — the junctions are the children. After an upstream sync that adds skills, re-run the script.

@@ -54,7 +54,7 @@ git clone https://github.com/vishalkdotcom/skills.git "$env:USERPROFILE\repos\sk
 pwsh -File "$env:USERPROFILE\repos\skills\scripts\setup-windows-agents-link.ps1"
 ```
 
-That backs up any existing `%USERPROFILE%\.agents\skills` folder and creates a junction to the clone’s `skills\` tree. Day-to-day: `git pull` in `C:\Users\vishal\repos\skills` after you push from WSL.
+That backs up any existing `%USERPROFILE%\.agents\skills` folder and builds a folder of **per-skill junctions**, honoring [`.agents-runtime-exclude`](./.agents-runtime-exclude). Day-to-day: `git pull` in `C:\Users\vishal\repos\skills` after you push from WSL.
 
 ## Day-to-day workflow
 
