@@ -16,35 +16,39 @@ Use **this repo** when you want Git history, local forks, and custom skills in o
 
 ### From Matt (sync with `./scripts/sync-upstream.sh`)
 
-`ask-matt`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `grill-me`, `grill-with-docs`, `grilling`, `handoff`, `implement`, `improve-codebase-architecture`, `loop-me`, `prototype`, `research`, `resolving-merge-conflicts`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `to-spec`, `to-tickets`, `triage`, `wayfinder`, `writing-great-skills`
+`ask-matt`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `grill-me`, `grill-with-docs`, `grilling`, `handoff`, `implement`, `improve-codebase-architecture`, `loop-me`, `prototype`, `research`, `resolving-merge-conflicts`, `setup-matt-pocock-skills`, `setup-pre-commit`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wait-what`, `wayfinder`, `wizard`, `writing-for-agents`
 
 No local forks — all Matt skills match upstream unless you explicitly `--force` a one-off experiment.
 
-**Main build chain (v1.1):**
+**Main build chain (v1.2):**
 
 ```
 grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
 - `/grill-with-docs` → runs `/grilling` + `/domain-modeling`
-- `/wayfinder` → situational on-ramp for efforts too big/foggy for one session (then merges onto the main chain)
+- `/wayfinder` → situational on-ramp for efforts too big/foggy for one session (then merges onto the main chain at `/to-spec`)
 - `/improve-codebase-architecture` → uses `/codebase-design` vocabulary
 - `/ask-matt` → router over the skills
+- `/to-questionnaire` → inverse of `/grill-me` (questionnaire for someone else)
+- `/wait-what` → mid-conversation re-pitch when a message didn't land
+- `/wizard` → model-invoked interactive bash script for human-only setup steps (URLs, secrets, dashboards)
 
 **Upstream renames (sync script does not auto-migrate — handle manually):**
 
-| Old name            | New name               |
-| ------------------- | ---------------------- |
-| `diagnose`          | `diagnosing-bugs`      |
-| `write-a-skill`     | `writing-great-skills` |
-| `to-prd`            | `to-spec`              |
-| `to-issues`         | `to-tickets`           |
-| `decision-mapping`  | `wayfinder`            |
-| `review`            | `code-review`          |
+| Old name               | New name               |
+| ---------------------- | ---------------------- |
+| `diagnose`             | `diagnosing-bugs`      |
+| `write-a-skill`        | `writing-great-skills` |
+| `writing-great-skills` | `writing-for-agents`   |
+| `to-prd`               | `to-spec`              |
+| `to-issues`            | `to-tickets`           |
+| `decision-mapping`     | `wayfinder`            |
+| `review`               | `code-review`          |
 
 ### Local-only (yours — never synced from Matt)
 
-`browser-demo-test`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
+`browser-demo-test`, `git-defaults`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `ship-core`, `ship-cra`, `ship-django`, `ship-lake`, `ship-next`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
 
 Scenario scripts (Tier B `run.ps1` + `flow.js`) live in the separate **`~/repos/wovo-browser-qa`** repo — not in this skills tree.
 

@@ -6,4 +6,5 @@ Skills removed from the active `skills/` tree (still available here for referenc
 | --- | --- | --- |
 | `wovo-prototypes` | 2025-06-25 | Repo archived at `~/repos/archive/wovo-prototypes/` |
 | `diagnose` | 2026-06-25 | Renamed upstream to `diagnosing-bugs` |
-| `write-a-skill` | 2026-06-25 | Renamed upstream to `writing-great-skills` |
+| `write-a-skill` | 2026-06-25 | Renamed upstream to `writing-great-skills` (later `writing-for-agents`) |
+| `writing-great-skills` | 2026-08-06 | Renamed upstream to `writing-for-agents` |
