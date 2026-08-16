@@ -2,8 +2,11 @@
 # One name per line. Lines starting with # are ignored.
 
 browser-demo-test
+codebase-design
 metabase-local-api
 obsidian-vault
+resolving-merge-conflicts
+setup-pre-commit
 ship-core
 ship-cra
 ship-django
