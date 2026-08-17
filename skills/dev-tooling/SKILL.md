@@ -1,25 +1,44 @@
 ---
 name: dev-tooling
-description: Dev tooling on this machine (`uv`/`uvx`, `bun`/`bunx`, `fnm`) and Windows/pwsh gotchas for env/deps/tool runs. Use when creating envs, installing dependencies, or running language CLIs (`uv`/`bun`/`fnm`), enabling Corepack/pnpm because a project requires it, or when a repo already uses these tools (`uv.lock`, `bun.lock*`, `.node-version`/`packageManager`).
+description: Node, pnpm, Python, and JS CLIs on this machine (fnm, Scoop pnpm, uv, bun). Use when installing dependencies, running package scripts, or invoking node, npm, pnpm, uv, bun, or fnm.
 ---
 
 # Dev Tooling
 
-## Available on this machine
+## Apply fnm when the command needs Node
+
+Agent shells already have Scoop `pnpm`, `uv`, and `bun` on PATH. They start without `node`. Before `node`, `npm`, `npx`, or any command that runs project JavaScript (`pnpm test`, `pnpm exec`, `pnpm dev`), apply fnm **once per shell**:
+
+```powershell
+fnm env --shell powershell | ForEach-Object { Invoke-Expression $_ }
+```
+
+Done when `node --version` prints a version that `fnm list` knows (default is 24). Skip this step when that is already true.
+
+One-shot without mutating PATH:
+
+```powershell
+fnm exec -- node --version
+fnm exec -- npm.cmd --version
+```
+
+`fnm exec` resolves `node.exe` by name. npm/npx need the `.cmd` name. Scoop pnpm is `pnpm.exe` — invoke `pnpm` directly.
+
+Chain agent Shell commands with `;`.
+
+## Project toolchain
+
+Follow the repo's lockfile and `packageManager` / `devEngines.packageManager`. Scoop `pnpm` honors `packageManager` (`pmOnFail: download`). Use `uv` in Python repos, `bun` when the repo is bun.
+
+## On this machine
 
 | Tool | Role |
 |---|---|
-| `uv` / `uvx` | Python envs, deps, lockfiles, one-off Python CLIs; managed CPython via `uv` (3.14.x installed) |
-| `bun` / `bunx` | JS runtime, package installs, one-off JS CLIs |
-| `fnm` | Node version manager — **v24.18.x** default, **v18.20.x** also installed |
-| Corepack → `pnpm` / `yarn` | Not global; enable when a project requires them (`packageManager`, `pnpm-lock.yaml`, etc.) |
+| `uv` / `uvx` | Python envs, deps, lockfiles, one-off CLIs |
+| `bun` / `bunx` | JS runtime, installs, one-off CLIs |
+| `fnm` | Node versions — `fnm list` is the inventory |
+| `pnpm` | Scoop `pnpm.exe` |
 
-Versions drift; if uncertain, check with `uv --version`, `bun --version`, `fnm --version` / `fnm list`. Leave CLI surface to `--help` — this file is inventory and gotchas only.
+CLI surface is `--help`. Prefer `.exe` / `.cmd` shims (`pnpm.exe`, `npm.cmd`) from Windows PowerShell.
 
-## Gotchas on this machine
-
-- Fresh agent shells lack `node`/`npm` on PATH until `fnm env` is applied. In pwsh: `fnm env --shell power-shell | ForEach-Object { Invoke-Expression $_ }`, or run via `fnm exec -- <cmd>`.
-- ExecutionPolicy blocks `*.ps1` shims (`npm.ps1`, some Scoop scripts). Call the `.cmd` entrypoint (e.g. `npm.cmd`) or another non-ps1 shim.
-- `python` / `python.exe` under WindowsApps is the Store stub, not a real interpreter — `uv` provides working envs/installs/`uv run`/`uvx`.
-- `FNM_COREPACK_ENABLED` is false by default. When a project needs pnpm/yarn: apply `fnm env`, run `corepack enable`, then use what `packageManager` / the lockfile asks for.
-- Project wins: follow existing lockfiles and `packageManager`. This skill advertises availability; it does not override a repo’s chosen toolchain.
+`python` / `python3` under WindowsApps are Store stubs — `uv run` / `uvx` are the working interpreters.
