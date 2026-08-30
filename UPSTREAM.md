@@ -48,7 +48,9 @@ grill-with-docs → to-spec → to-tickets → implement → code-review
 
 ### Local-only (yours — never synced from Matt)
 
-`browser-demo-test`, `git-defaults`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `ship-core`, `ship-cra`, `ship-django`, `ship-lake`, `ship-next`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
+`browser-demo-test`, `for-example`, `git-defaults`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `ship-core`, `ship-cra`, `ship-django`, `ship-lake`, `ship-next`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
+
+`/for-example` sits beside `/wait-what`: same mid-conversation re-pitch when a message did not land, as a worked example from the thread or the repo.
 
 Scenario scripts (Tier B `run.ps1` + `flow.js`) live in the separate **`~/repos/wovo-browser-qa`** repo — not in this skills tree.
 

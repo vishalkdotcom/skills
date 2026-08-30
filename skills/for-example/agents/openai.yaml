@@ -1,0 +1,5 @@
+interface:
+  display_name: "For Example"
+  short_description: "Re-pitch that — as a worked example from here"
+policy:
+  allow_implicit_invocation: false
