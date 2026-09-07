@@ -1,0 +1,16 @@
+{
+  "workspace_label": "ship",
+  "tabs": [
+    {
+      "label": "agents",
+      "panes": [
+        { "label": "implement" },
+        { "label": "review", "direction": "right" }
+      ]
+    },
+    {
+      "label": "checks",
+      "panes": [{ "label": "checks" }]
+    }
+  ]
+}

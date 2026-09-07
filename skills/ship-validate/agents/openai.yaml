@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship validate"
+  short_description: "Checks and browser QA, then stop"
+policy:
+  allow_implicit_invocation: false

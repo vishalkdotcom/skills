@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship PR"
+  short_description: "Engineering PR and Guided QA comment, then stop"
+policy:
+  allow_implicit_invocation: false

@@ -48,7 +48,9 @@ grill-with-docs → to-spec → to-tickets → implement → code-review
 
 ### Local-only (yours — never synced from Matt)
 
-`browser-demo-test`, `for-example`, `git-defaults`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `ship-core`, `ship-cra`, `ship-django`, `ship-lake`, `ship-next`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
+`browser-demo-test`, `for-example`, `git-defaults`, `json-canvas`, `metabase-local-api`, `obsidian-bases`, `obsidian-cli`, `obsidian-markdown`, `obsidian-vault`, `playwright-cli`, `ship`, `ship-herdr`, `ship-implement`, `ship-pr`, `ship-review`, `ship-validate`, `subagent-explore`, `subagent-investigate`, `test-report-pr-markdown`, `yaak-cli`
+
+GitHub-ticket Engineering PR chain: `/ship` (router) → `/ship-implement` → `/ship-validate` → `/ship-review` → `/ship-pr`. Herdr panes: `/ship-herdr` (layout in `ship-herdr/layout.json`). WPM `ship-next` / `ship-django` / `ship-cra` / `ship-lake` / `ship-core` archived 2026-09-07 under `archive/`.
 
 `/for-example` sits beside `/wait-what`: same mid-conversation re-pitch when a message did not land, as a worked example from the thread or the repo.
 

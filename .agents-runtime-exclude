@@ -7,10 +7,5 @@ metabase-local-api
 obsidian-vault
 resolving-merge-conflicts
 setup-pre-commit
-ship-core
-ship-cra
-ship-django
-ship-lake
-ship-next
 test-report-pr-markdown
 yaak-cli

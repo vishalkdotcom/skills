@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship"
+  short_description: "Router: four units, two gates, one Engineering PR"
+policy:
+  allow_implicit_invocation: false

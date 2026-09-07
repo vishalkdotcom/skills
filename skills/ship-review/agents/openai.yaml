@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship review"
+  short_description: "Read-only review battery, then stop"
+policy:
+  allow_implicit_invocation: false

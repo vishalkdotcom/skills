@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship Herdr"
+  short_description: "Apply ship layout; run cursor-agent units in panes"
+policy:
+  allow_implicit_invocation: false
