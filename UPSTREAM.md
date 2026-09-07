@@ -52,6 +52,10 @@ grill-with-docs → to-spec → to-tickets → implement → code-review
 
 `/for-example` sits beside `/wait-what`: same mid-conversation re-pitch when a message did not land, as a worked example from the thread or the repo.
 
+### Vendored from HumanLayer (not synced)
+
+`show-me` — from [humanlayer/skills](https://github.com/humanlayer/skills) (`plugins/show-me`, MIT). Re-copy from upstream if they ship updates; `sync-upstream.sh` does not cover this. Local addition: Windows `Start-Process` note for opening HTML artifacts.
+
 Scenario scripts (Tier B `run.ps1` + `flow.js`) live in the separate **`~/repos/wovo-browser-qa`** repo — not in this skills tree.
 
 (`obsidian-vault` shares a name with Matt's personal skill but is **your** vault router — listed in `.upstream-exclude` so sync never overwrites it.)
