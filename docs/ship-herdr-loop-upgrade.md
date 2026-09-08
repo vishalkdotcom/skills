@@ -2,7 +2,7 @@
 
 Apply the validated #102 autopsy advice (items 1–7, plus item 9's session-budget policy and token-tracking instrumentation) to the `skills/ship*` files. Execute top to bottom. Each item names its decision ticket (detail lives there), the exact file changes, and a done-when tied to the failure it kills.
 
-Verbatim replacement texts live in the research findings files on this repo's branches (`docs/research/<name>.md` on `research/<name>`; ctx-channels on `prototype/ctx-channels`). Each item below points at its file.
+Verbatim replacement texts live in `docs/research/<name>.md` on `main`. Each item below points at its file.
 
 ## Preconditions (already done — verify, do not redo)
 
@@ -15,7 +15,7 @@ Decision: hybrid schema — append-only `## Log` journal + minimal mutable state
 
 Files:
 
-- `skills/ship/progress.md` — replace with the full text in `docs/research/progress-file.md` on branch `research/progress-file`. The changes against the baseline:
+- `skills/ship/progress.md` — replace with the full text in `docs/research/progress-file.md`. The changes against the baseline:
   - Add a rules header at the top: Brief write-once; Findings open-items-only; Log append-only; `unit_done` once, last, after Evidence.
   - Findings section gains "(open items only — cleared findings leave this section)".
   - New `## Log` section before `## Tree`: append-only, newest at bottom, one ≤20-word line per finished unit — `unit · pass first|fix <n>|review <n> · class · why · next`, `class` = worst finding class left (hard | judgement | nit | none).
@@ -29,7 +29,7 @@ Decision: judgement stays must-clear but requires an inline cite (AC, spec line,
 
 Files:
 
-- `skills/ship/review-rules.md` — replace with the full text in `docs/research/review-rules.md` on branch `research/review-rules`. Changes are confined to:
+- `skills/ship/review-rules.md` — replace with the full text in `docs/research/review-rules.md`. Changes are confined to:
   - Severity table: Judgement row gains "with a cite — an AC, a spec line, or a named `CODING_STANDARDS.md` rule"; Nit row gains "any finding without a cite".
   - New **Cite or drop** paragraph: no cite → nit; equivalent markup/type shapes that already meet the AC are nit — never prescribe a different shape meeting the same AC.
   - New **Stable** paragraph: before classifying, check the progress file's cleared-finding record (`## Log` lines, else prior Findings entries); re-raising or reversing a cleared finding is nit unless the current diff made that code newly hard.
@@ -43,7 +43,7 @@ Decision: 6-line template; `Repo:` / `Claim-gate:` / `Tool calls:` dropped; slot
 
 Files:
 
-- `skills/ship-herdr/prompt.md` — replace with the full text in `docs/research/prompt-slots.md` on branch `research/prompt-slots`, then apply the two one-line slot appends from items 5 and 6 below (`Handoff:`, `App:`). The final template, after all appends, is:
+- `skills/ship-herdr/prompt.md` — replace with the full text in `docs/research/prompt-slots.md`, then apply the two one-line slot appends from items 5 and 6 below (`Handoff:`, `App:`). The final template, after all appends, is:
 
 ```
 Follow <unit-skill-path>.
@@ -68,7 +68,7 @@ Decision: statusline.js pushes `tokens.ctx` (5-min TTL) via `herdr pane report-m
 
 Files:
 
-- `skills/ship-herdr/scripts/read-ctx.ps1` and `skills/ship-herdr/scripts/statusline-ctx-log.js` — land on `main` from branch `prototype/ctx-channels` (commit `2a8d9e7`, plus `docs/research/ctx-channels.md`). Nothing on the map specifies how the prototype branch lands — merge or cherry-pick that commit.
+- `skills/ship-herdr/scripts/read-ctx.ps1` and `skills/ship-herdr/scripts/statusline-ctx-log.js` — already on `main` (cherry-picked from `prototype/ctx-channels` as `b0bb25f`, with `docs/research/ctx-channels.md`).
 - Machine setup (not a repo file; this machine already has it): copy `statusline-ctx-log.js` to `~/.cursor/`, splice `require("./statusline-ctx-log.js").report(p)` into `~/.cursor/statusline.js` after `JSON.parse`. Backup exists at `~/.cursor/statusline.js.bak-ctx-proto`. Helper is a no-op outside Herdr panes.
 - Orchestrator read pattern: before every reuse prompt, `pwsh -NoProfile -File scripts/read-ctx.ps1 -Name <occupant>` → JSON `{name, pane_id, session_id, pct, source}`. `pct >= 50` → rotate (item 5). `source: unknown` / exit 2 → reuse; never rotate on a read failure.
 
@@ -80,7 +80,7 @@ Decision: per-role rule is primary (review/PR always fresh, implement fix-pass a
 
 Files:
 
-- `skills/ship-herdr/SKILL.md` — add the `## Session policy` section after "This run". Full text in `docs/research/session-policy.md` on branch `research/session-policy`, with one substitution: in the **Budget override** paragraph, replace the "quick: … robust: …" sentence with the resolved read pattern from item 4:
+- `skills/ship-herdr/SKILL.md` — add the `## Session policy` section after "This run". Full text in `docs/research/session-policy.md`, with one substitution: in the **Budget override** paragraph, replace the "quick: … robust: …" sentence with the resolved read pattern from item 4:
 
   > **Budget override (circuit breaker):** reuse only while the occupant's context stays under ~50–60%. Before every reuse prompt, run `pwsh -NoProfile -File scripts/read-ctx.ps1 -Name <occupant>` (`tokens.ctx` from statusline.js → `report-metadata`, scrape fallback). If `pct >= 50`, rotate instead of prompting again.
 
@@ -96,7 +96,7 @@ Decision: third `dev` tab; orchestrator starts `portless` (not `pnpm dev`) and w
 
 Files:
 
-- `skills/ship-herdr/layout.json` — add a third tab after `checks`: `{ "label": "dev", "panes": [{ "label": "dev" }] }`. Full file in `docs/research/dev-tab-portless.md` on branch `research/dev-tab-portless`. No `apply-layout.ps1` change (it iterates tabs). No comments — JSON cannot hold them.
+- `skills/ship-herdr/layout.json` — add a third tab after `checks`: `{ "label": "dev", "panes": [{ "label": "dev" }] }`. Full file in `docs/research/dev-tab-portless.md`. No `apply-layout.ps1` change (it iterates tabs). No comments — JSON cannot hold them.
 - `skills/ship-herdr/SKILL.md` line 12 — replace "Server must already be running." with "The orchestrator starts the app in the `dev` pane (below)."
 - `skills/ship-herdr/SKILL.md` — insert the dev-server step after apply-layout (final numbering in the merged list below):
 
@@ -123,7 +123,7 @@ Files:
 
   > **Unit complete — the progress file is the boundary.** Poll it every 30s until BOTH `unit_done` is this unit AND the Log has one new line since the prompt. File changed within 10 min → still working. `agent_prompt_stalled` → the prompt never landed; tail the pane, resubmit once. No file change for 10 min → audit: `herdr agent explain <name>` + `agent read --lines 40`. Explain shows working → keep polling, don't re-prompt. Finished but unstamped → re-prompt once: "stamp `unit_done` + your Log line, nothing else." Leave the pane `blocked` for the human on: pane blocked, 45 min with no file change and no working state, or a second missing stamp.
 
-  Exact diff in `docs/research/completion-boundary.md` on branch `research/completion-boundary`.
+  Exact diff in `docs/research/completion-boundary.md`.
 
 Done-when: the orchestrator never again stamps or accepts `unit_done` off a `--wait` idle reading — completion requires this unit's `unit_done` plus one new Log line, both, and a transient idle between tool rounds only triggers an audit, never a re-prompt.
 
@@ -137,7 +137,7 @@ Files:
 
   > **Circuit breaker:** count back through the Log's `review` lines. When the last 2 consecutive review units both left class `judgement` or `nit` only — no `hard`, no `scope_wall` — on the same paths (you read each unit's Findings; compare paths), the review loop is oscillating. Trip it: write `next: human-qa` on the progress file, append one Log line `- orchestrator · breaker · <worst class> · 2 same-path judgement/nit reviews · human-qa`, and start no further units. Any `hard` class or scope wall resets the count.
 
-  Exact diff in `docs/research/circuit-breaker.md` on branch `research/circuit-breaker`. The breaker line extends the Log grammar with two one-token values (`unit: orchestrator`, `pass: breaker`); no `progress.md` change.
+  Exact diff in `docs/research/circuit-breaker.md`. The breaker line extends the Log grammar with two one-token values (`unit: orchestrator`, `pass: breaker`); no `progress.md` change.
 
 Done-when: two consecutive same-path judgement/nit-only reviews end the machine loop at Guided QA instead of burning a third full review battery on an unchanged diff — the #102 oscillation stops at review 2, with the open findings visible to the human.
 
