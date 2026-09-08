@@ -24,9 +24,9 @@ Apply from **this skill’s directory**: `pwsh -File scripts/apply-layout.ps1 -C
    - Do **not** match `awesomeapps.localhost` as readiness — portless prints `-> https://awesomeapps.localhost` *before* it spawns Next.
 6. **Implement / review / pr:** pane is an idle shell. `herdr agent start <name> --kind cursor --pane <id> -- --force --trust`. Session choice per unit: [Session policy](#session-policy).
 7. **Validate:** `--kind cursor` occupant in the checks pane (browser QA), same start args. Progress file still comes from `ship-validate`.
-8. Prompt from [prompt.md](prompt.md) with `--wait` (`herdr agent prompt --help`).
+8. Prompt from [prompt.md](prompt.md) with `--wait` (`herdr agent prompt --help`). First note the progress file's Log line count. `--wait` returning means the pane settled enough to read — never that the unit is done.
 9. When `copy_agreed` is `no`, leave the pane `blocked` for the human.
-10. **Unit complete:** the progress file has `unit_done` for this unit. Diagnose a stall with a short pane tail; the progress file is the boundary.
+10. **Unit complete — the progress file is the boundary.** Poll it every 30s until BOTH `unit_done` is this unit AND the Log has one new line since the prompt. File changed within 10 min → still working. `agent_prompt_stalled` → the prompt never landed; tail the pane, resubmit once. No file change for 10 min → audit: `herdr agent explain <name>` + `agent read --lines 40`. Explain shows working → keep polling, don't re-prompt. Finished but unstamped → re-prompt once: "stamp `unit_done` + your Log line, nothing else." Leave the pane `blocked` for the human on: pane blocked, 45 min with no file change and no working state, or a second missing stamp.
 11. Loop 2–10 until `next: human-qa`. Then stop.
 
 **Done when:** each finished unit has a progress file; this chat ran claim-gate on a fresh ticket, applied the layout, and started/waited on pane agents; the human still owns Guided QA and merge.
