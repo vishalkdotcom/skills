@@ -1,34 +1,36 @@
 ---
 name: ship-implement
-description: "Ship unit: understand, branch, plan gate, TDD. Write the progress file and stop."
+description: "Ship unit: brief, branch, copy, TDD. Write the progress file and stop."
 disable-model-invocation: true
 argument-hint: "ticket number"
 ---
 
 # Ship — implement
 
-One ticket. This chat writes the ticket’s code.
+One ticket. This chat writes the ticket’s code. This chat stays in Agent. The ticket is the approach.
 
-Progress file: [../ship/progress.md](../ship/progress.md). Findings to clear: [../ship/review-rules.md](../ship/review-rules.md).
+Progress file: [../ship/progress.md](../ship/progress.md). `gh` and retries: [../ship/tool-calls.md](../ship/tool-calls.md).
+
+If the progress Brief is already filled and `copy_agreed` is `yes` or `n/a`, skip to Branch then [implement.md](implement.md).
 
 ## Steps
 
-1. **Understand** — `gh issue view <n> --comments`. Parent spec the ticket names. `CODING_STANDARDS.md` for every layer this ticket hits. UI tickets: prototype branch `NOTES.md` vs `DESIGN.md` (conflict with no recorded break → `DESIGN.md` is stale). Token budget: `docs/agents/to-tickets-guidance.md` when that file exists — if the work is overrunning, stop and propose a split.
+1. **Claim** — Fresh ticket only (no progress file): [../ship/claim-gate.md](../ship/claim-gate.md).
 
-   **Done when:** you can state the acceptance criteria, the spec constraints, and which component layers the work touches.
+   **Done when:** that file's Done when holds, or a progress file already exists.
 
-2. **Branch** — Branch per ticket as `docs/agents/to-tickets-guidance.md` (or `AGENTS.md` if that file is absent).
+2. **Brief** — One `gh issue view <n> --comments`. Quote every AC into the progress Brief. Parent spec: the section the ticket names. `CODING_STANDARDS.md` index; open a child for a layer the ticket's files sit in. UI: prototype path the ticket names (`NOTES.md` vs `DESIGN.md`; conflict with no recorded break → `DESIGN.md` is stale). Seam paths the ticket needs: one explore subagent; parent writes the paths it returns. Search the repo cwd and paths the ticket names. Token budget: `docs/agents/to-tickets-guidance.md` when that file exists — if the Brief still cannot be filled after that explore pass, stop and propose a split.
+
+   **Done when:** the progress Brief quotes every AC, names layers, names the lock path or `n/a`, and lists seam paths from the explore subagent.
+
+3. **Copy** — User-facing strings. If every string is in the ticket, `copy_agreed: n/a`. If a string is missing, ask against `PRODUCT.md` when that file exists; wait until the human answers.
+
+   **Done when:** `copy_agreed` is `yes` or `n/a`. Stop while it is `no`.
+
+4. **Branch** — Branch per ticket as `docs/agents/to-tickets-guidance.md` (or `AGENTS.md` if that file is absent).
 
    **Done when:** HEAD is the ticket branch.
 
-3. **Plan** — Architecture before code: layers, server/client split, where state lives (URL via nuqs / local / server). `CODING_STANDARDS.md` and the files it names. UI copy (titles, paragraphs, empty states): brainstorm with the human against `PRODUCT.md` when that file exists.
+5. **Code** — [implement.md](implement.md).
 
-   **Done when:** the human has agreed the approach and, for UI tickets, the copy. Stop here while that is open.
-
-4. **Implement** — Only what the ticket asks, under `CODING_STANDARDS.md`. TDD at ticket seams (`tdd` skill). During non-trivial edits, run the `check` and `typecheck` scripts `package.json` names. If Findings lists hard or judgement: clear those this unit, then re-run check and typecheck.
-
-   **Done when:** every acceptance criterion holds in the working tree. If Findings listed hard or judgement, those are cleared as well.
-
-5. **Progress** — Write the progress file from the template. `unit_done: implement`. `next: validate`. Pasteable next prompt naming `ship-validate`.
-
-   **Done when:** that file is on disk with evidence and next prompt. Then stop.
+   **Done when:** that file's Done when holds.

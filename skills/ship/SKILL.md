@@ -13,7 +13,7 @@ This skill **names** the next unit, then stop.
 
 Human gates (you):
 
-1. Agree the plan (and copy, for UI) before code.
+1. Agree copy when the ticket left strings open.
 2. Guided QA, then merge.
 
 ## Units

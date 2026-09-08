@@ -1,5 +1,5 @@
 interface:
   display_name: "Ship implement"
-  short_description: "TDD the ticket, write progress, stop"
+  short_description: "Brief, copy, TDD, write progress, stop"
 policy:
   allow_implicit_invocation: false
