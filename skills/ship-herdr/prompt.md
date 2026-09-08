@@ -10,6 +10,7 @@ Progress file: <path>
 Pass: first | fix <n> | review <n>
 Clear: none | Findings
 Session: new | reuse
+Handoff: none | <path>
 ```
 
 On `Clear: Findings`, quote the findings to clear verbatim under `Findings:`.
@@ -28,3 +29,4 @@ On a re-validate after a fix pass, add `Re-run only: <commands>` (scoped, see be
   - pr — `Pass: first`, `Clear: none`, `Session: new` (always a fresh occupant)
 - **Scoped re-validation.** A re-validate run executes only the commands the fix-pass diff can affect — the `check` and `typecheck` scripts `package.json` names, plus the test files at the ticket's seams — never the full CI battery. Browser QA re-runs only when the fix-pass diff touches UI routes or components (the existing condition in `ship-validate`).
 - **Never in the prompt:** repo slug, claim-gate status, tool-calls path — the skill files and Herdr own those.
+- **Rotation.** When the session-policy budget override rotates a reused implement/validate occupant, the fresh occupant gets `Session: new` + `Handoff: <path>` (the doc the outgoing occupant's `handoff` skill wrote, or an orchestrator-reconstructed one). Every other prompt is `Handoff: none`.
