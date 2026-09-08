@@ -11,6 +11,7 @@ Pass: first | fix <n> | review <n>
 Clear: none | Findings
 Session: new | reuse
 Handoff: none | <path>
+App: https://awesomeapps.localhost
 ```
 
 On `Clear: Findings`, quote the findings to clear verbatim under `Findings:`.

@@ -9,7 +9,7 @@ argument-hint: "ticket number"
 
 Same units as `ship`. This skill owns **where** they run. Layout: [layout.json](layout.json) (labels and splits only — idle shells). Occupants: `--kind cursor` in those panes (`herdr agent --help`). Herdr has no Auto-review card, so start args after `--` are `--force --trust`.
 
-Apply from **this skill’s directory**: `pwsh -File scripts/apply-layout.ps1 -Cwd <repo>`. `--Rebuild` is the script’s param. Pane labels come from `layout.json`. Server must already be running.
+Apply from **this skill’s directory**: `pwsh -File scripts/apply-layout.ps1 -Cwd <repo>`. `--Rebuild` is the script’s param. Pane labels come from `layout.json`. The orchestrator starts the app in the `dev` pane (below).
 
 ## This run
 
@@ -17,12 +17,17 @@ Apply from **this skill’s directory**: `pwsh -File scripts/apply-layout.ps1 -C
 2. Read the progress file when it exists ([../ship/progress.md](../ship/progress.md)). Next unit from [../ship/SKILL.md](../ship/SKILL.md) Units table (`next` field, else implement).
 3. Fresh ticket (no progress file): [../ship/claim-gate.md](../ship/claim-gate.md). Stop when that file says stop.
 4. Run `apply-layout.ps1`. Keep the printed pane map.
-5. **Implement / review / pr:** pane is an idle shell. `herdr agent start <name> --kind cursor --pane <id> -- --force --trust`. Session choice per unit: [Session policy](#session-policy).
-6. **Validate:** `--kind cursor` occupant in the checks pane (browser QA), same start args. Progress file still comes from `ship-validate`.
-7. Prompt from [prompt.md](prompt.md) with `--wait` (`herdr agent prompt --help`).
-8. When `copy_agreed` is `no`, leave the pane `blocked` for the human.
-9. **Unit complete:** the progress file has `unit_done` for this unit. Diagnose a stall with a short pane tail; the progress file is the boundary.
-10. Loop 2–9 until `next: human-qa`. Then stop.
+5. **Dev server.** From the pane map, take the `dev` pane id.
+   - If `herdr pane wait-output <dev> --regex "Ready in" --timeout 2000` already matches, reuse that process.
+   - Else `herdr pane run <dev> portless` (cwd is the layout cwd — the target repo). Then `herdr pane wait-output <dev> --regex "Ready in" --timeout 120000`.
+   - On wait failure: do not start occupants. Tail the pane, stop, leave it for the human.
+   - Do **not** match `awesomeapps.localhost` as readiness — portless prints `-> https://awesomeapps.localhost` *before* it spawns Next.
+6. **Implement / review / pr:** pane is an idle shell. `herdr agent start <name> --kind cursor --pane <id> -- --force --trust`. Session choice per unit: [Session policy](#session-policy).
+7. **Validate:** `--kind cursor` occupant in the checks pane (browser QA), same start args. Progress file still comes from `ship-validate`.
+8. Prompt from [prompt.md](prompt.md) with `--wait` (`herdr agent prompt --help`).
+9. When `copy_agreed` is `no`, leave the pane `blocked` for the human.
+10. **Unit complete:** the progress file has `unit_done` for this unit. Diagnose a stall with a short pane tail; the progress file is the boundary.
+11. Loop 2–10 until `next: human-qa`. Then stop.
 
 **Done when:** each finished unit has a progress file; this chat ran claim-gate on a fresh ticket, applied the layout, and started/waited on pane agents; the human still owns Guided QA and merge.
 
@@ -43,3 +48,25 @@ Apply from **this skill’s directory**: `pwsh -File scripts/apply-layout.ps1 -C
 **Handoff artifact:** the `handoff` skill shape — a Markdown doc in the OS temp dir (never the workspace), tailored to what the next unit will do, with a suggested-skills section, and **references not copies** (ticket URL, progress file path, commits; specs and diffs are never duplicated). Its unique value over the progress file: it carries **why / dead ends / failed approaches** out of an occupant too full — or dead — to write the progress file itself. Production order: prompt the outgoing occupant to run its `handoff` skill (argument: what the next unit does) *before* `/exit`; if the occupant is already dead, the orchestrator reconstructs a minimal handoff from the progress file + Log + branch commits, or omits `Handoff:` — the progress file already covers intra-ticket state.
 
 **Compaction:** `/summarize` (`/compact`) is an intra-unit safety valve only — never the handoff mechanism. At unit boundaries, fresh occupant + artifacts (progress file, handoff doc) beats compaction.
+
+## Named URL
+
+Occupants are told **only** the named portless URL. Never `localhost:<port>`, never `127.0.0.1:<port>`, never invent a port.
+
+This loop's URL is `https://awesomeapps.localhost` (HTTPS, proxy on 443). Fill the occupant prompt's `App:` slot with that string. If a linked git worktree prefixes the hostname, fill `App:` with the URL portless actually printed (`-> …`), not the unprefixed default.
+
+**Start command:** `herdr pane run <dev> portless` — zero-arg `portless` runs the package.json `dev` script through the proxy. Do not run `pnpm dev` in that pane; awesomeapps's `dev` is unwrapped `next dev`.
+
+**Proxy rung (this machine):** default HTTPS on 443. Do **not** pass `-p 1355` or `--no-tls`. Do not `portless service install`. If the proxy is not running, `portless` auto-starts it; CA trust and OpenSSL are already done (doctor ticket).
+
+**Fallback ladder** (other machines only — not this one):
+
+| Rung | Proxy | Occupant URL |
+| --- | --- | --- |
+| default | HTTPS 443 | `https://<name>.localhost` |
+| 443 noisy | `-p 1355` (keep TLS) | `https://<name>.localhost:1355` |
+| TLS itself fails | `--no-tls` | `http://<name>.localhost` |
+
+`curl.exe` without `--ssl-no-revoke` failing `CRYPT_E_NO_REVOCATION_CHECK (0x80092012)` is a schannel revocation quirk, **not** TLS-trust failure — do not step to `--no-tls` because of it. Occupants use the browser / playwright-cli, not bare curl.
+
+**e2e:** `CI=true PORT=3002` against a production server (`pnpm start`). Never start portless under CI. Browser QA (ship-validate step 2) uses `App:` against the already-running named URL.

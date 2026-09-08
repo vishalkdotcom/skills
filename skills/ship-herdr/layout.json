@@ -11,6 +11,10 @@
     {
       "label": "checks",
       "panes": [{ "label": "checks" }]
+    },
+    {
+      "label": "dev",
+      "panes": [{ "label": "dev" }]
     }
   ]
 }
