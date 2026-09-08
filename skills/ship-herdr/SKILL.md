@@ -40,9 +40,9 @@ Apply from **this skill’s directory**: `pwsh -File scripts/apply-layout.ps1 -C
 - **implement** — new on first run; a fix pass may reuse the same occupant.
 - **validate** — new on first run; a re-validate may reuse with a delta prompt (`Re-run only:` scoped commands, see prompt.md).
 - **pr** — always a fresh occupant.
-- Do **not** new-session every step — a lean reused session is cheaper and already holds the diff in context.
+- Reuse is the default where the per-role rule allows it — a lean reused session is cheaper and already holds the diff in context.
 
-**Budget override (circuit breaker):** reuse only while the occupant's context stays under ~50–60%. Before every reuse prompt, run `pwsh -NoProfile -File scripts/read-ctx.ps1 -Name <occupant>` (`tokens.ctx` from statusline.js → `report-metadata`, scrape fallback). If `pct >= 50`, rotate instead of prompting again.
+**Budget override:** reuse only while the occupant's context stays under ~50–60%. Before every reuse prompt, run `pwsh -NoProfile -File scripts/read-ctx.ps1 -Name <occupant>` (`tokens.ctx` from statusline.js → `report-metadata`, scrape fallback). If `pct >= 50`, rotate instead of prompting again.
 
 **Bounded exception:** fix-pass reuse is safe when the session is well under budget *and* the findings to clear are quoted verbatim in the prompt (fully in context) — #102's 7-minute fix pass is the model. A fix pass that fails either condition rotates.
 

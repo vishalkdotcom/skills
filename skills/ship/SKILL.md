@@ -22,10 +22,10 @@ Human gates (you):
 | --- | --- | --- |
 | implement | `ship-implement` | no progress file, or `next: implement` |
 | validate | `ship-validate` | `next: validate` |
-| review | `ship-review` | `next: review` (new chat every time the diff changed) |
+| review | `ship-review` | `next: review` (always a new chat) |
 | pr | `ship-pr` | `next: pr` |
 
-After review findings: `ship-implement` (writer), then `ship-validate`, then a **new** `ship-review` when the diff changed.
+After review findings: `ship-implement` (writer), then `ship-validate`, then a **new** `ship-review`.
 
 Runtime with Herdr panes: `ship-herdr`. Same units. Layout: `ship-herdr/layout.json`.
 
