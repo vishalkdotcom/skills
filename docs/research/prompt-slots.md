@@ -1,7 +1,7 @@
 # Ticket #6 — Occupant prompt slots (Pass/Clear/Session) and scoped re-validation
 
 Branch: `research/prompt-slots`. Parent map: vishalkdotcom/skills#1.
-Source of truth: `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` ("advice doc" below, cited by line).
+Source of truth: `docs/research/ship-herdr-loop-102-validated-advice.md` ("advice doc" below, cited by line).
 
 ## Decision in one line
 

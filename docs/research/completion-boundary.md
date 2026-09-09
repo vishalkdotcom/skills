@@ -1,7 +1,7 @@
 # Research: Completion boundary — orchestrator unit-done detection
 
 Ticket: vishalkdotcom/skills#8 (map #1, advice item 6)
-Source doc: `docs/agent/ship-herdr-loop-102-validated-advice.md` in vishalkdotcom/awesomeapps ("the advice doc" below).
+Source doc: `docs/research/ship-herdr-loop-102-validated-advice.md` ("the advice doc" below).
 
 ## Decision
 

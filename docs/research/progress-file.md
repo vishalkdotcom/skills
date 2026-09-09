@@ -1,6 +1,6 @@
 # Research: Progress file as append-only memory (ticket #5)
 
-Decision ticket: `vishalkdotcom/skills#5`. Source of truth: `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` ("advice doc"), final advice item 3 and §"Methodology attributions".
+Decision ticket: `vishalkdotcom/skills#5`. Source of truth: `docs/research/ship-herdr-loop-102-validated-advice.md` ("advice doc"), final advice item 3 and §"Methodology attributions".
 
 ## Decision in one line
 
@@ -100,7 +100,7 @@ In-flight files were written under the committed HEAD schema (`plan_agreed` fiel
 
 ## Sources
 
-- Advice doc `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md`: final advice items 1, 2, 3, 4, 6; §Methodology attributions (over-attribution (a)); §#102 autopsy (premature `unit_done`).
+- Advice doc `docs/research/ship-herdr-loop-102-validated-advice.md`: final advice items 1, 2, 3, 4, 6; §Methodology attributions (over-attribution (a)); §#102 autopsy (premature `unit_done`).
 - `skills/ship/SKILL.md:34` (progress file path, gitignored); `skills/ship-herdr/SKILL.md:24` (progress file as completion boundary); `skills/ship-implement/SKILL.md:14,24` (Brief gates).
 - Working-tree `skills/ship/progress.md` (uncommitted baseline: Brief ac/layers/lock/seams, `copy_agreed`, no `plan_agreed`); committed `HEAD:skills/ship/progress.md` (old schema for migration).
 - [Anthropic, Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) (progress file + git as cross-window memory; models overwrite Markdown; JSON-over-Markdown / restricted edits / git ledger mitigations) — as verified and qualified by the advice doc.

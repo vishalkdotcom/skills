@@ -1,6 +1,6 @@
 # Research: circuit breaker for judgement/nit-only review loops (ticket #4)
 
-Decision ticket: `vishalkdotcom/skills#4`. Source of truth: `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` ("advice doc"), final advice item 2. Composes with ticket #3's severity vocabulary ([docs/research/review-rules.md on research/review-rules](https://github.com/vishalkdotcom/skills/blob/research/review-rules/docs/research/review-rules.md)) and ticket #5's Log line grammar ([docs/research/progress-file.md on research/progress-file](https://github.com/vishalkdotcom/skills/blob/research/progress-file/docs/research/progress-file.md)).
+Decision ticket: `vishalkdotcom/skills#4`. Source of truth: `docs/research/ship-herdr-loop-102-validated-advice.md` ("advice doc"), final advice item 2. Composes with ticket #3's severity vocabulary ([docs/research/review-rules.md on research/review-rules](https://github.com/vishalkdotcom/skills/blob/research/review-rules/docs/research/review-rules.md)) and ticket #5's Log line grammar ([docs/research/progress-file.md on research/progress-file](https://github.com/vishalkdotcom/skills/blob/research/progress-file/docs/research/progress-file.md)).
 
 ## Decision in one line
 

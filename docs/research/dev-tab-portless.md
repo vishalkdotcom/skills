@@ -1,6 +1,6 @@
 # Research: Dev tab layout + portless named-URL doctrine (ticket #9)
 
-Decision ticket: `vishalkdotcom/skills#9`. Source of truth: `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` ("advice doc", cited by line), final advice item 7. Prerequisite: [Run portless doctor and prove https://awesomeapps.localhost](https://github.com/vishalkdotcom/skills/issues/10) (closed) — this machine's proxy rung. Slot set: [Occupant prompt slots (Pass/Clear/Session)](https://github.com/vishalkdotcom/skills/issues/6) (`docs/research/prompt-slots.md` on `research/prompt-slots`) plus [Session policy](https://github.com/vishalkdotcom/skills/issues/7)'s `Handoff:` seventh line.
+Decision ticket: `vishalkdotcom/skills#9`. Source of truth: `docs/research/ship-herdr-loop-102-validated-advice.md` ("advice doc", cited by line), final advice item 7. Prerequisite: [Run portless doctor and prove https://awesomeapps.localhost](https://github.com/vishalkdotcom/skills/issues/10) (closed) — this machine's proxy rung. Slot set: [Occupant prompt slots (Pass/Clear/Session)](https://github.com/vishalkdotcom/skills/issues/6) (`docs/research/prompt-slots.md` on `research/prompt-slots`) plus [Session policy](https://github.com/vishalkdotcom/skills/issues/7)'s `Handoff:` seventh line.
 
 ## Decision in one line
 
@@ -129,7 +129,7 @@ Orchestrator always writes the actual named URL on `App:`. Layout.json cannot ho
 
 ## Sources
 
-- Advice doc `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md`: item 7 (doc:76); Herdr wait-output one-line regex (doc:35); layout idle-shells (doc:29); portless claims + CI/e2e (doc:57).
+- Advice doc `docs/research/ship-herdr-loop-102-validated-advice.md`: item 7 (doc:76); Herdr wait-output one-line regex (doc:35); layout idle-shells (doc:29); portless claims + CI/e2e (doc:57).
 - Doctor: [Run portless doctor and prove https://awesomeapps.localhost](https://github.com/vishalkdotcom/skills/issues/10) — HTTPS 443, no fallback, URL `https://awesomeapps.localhost`, curl revocation quirk.
 - Sibling findings: `docs/research/prompt-slots.md` on `research/prompt-slots`; `docs/research/session-policy.md` on `research/session-policy` (`Handoff:` seventh slot).
 - Repo: `skills/ship-herdr/layout.json`, `SKILL.md:12-25`, `scripts/apply-layout.ps1`, `prompt.md`; `skills/ship-validate/SKILL.md:16-20`.

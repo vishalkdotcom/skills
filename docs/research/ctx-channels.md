@@ -1,6 +1,6 @@
 # Prototype: Token-tracking instrumentation — ctx% channels (ticket 12)
 
-Decision ticket: [Token-tracking instrumentation: prototype ctx% channels and decide](https://github.com/vishalkdotcom/skills/issues/12). Source of truth: `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` §9 token-tracking paragraph. Serves [Session policy: per-role reuse, rotation threshold, handoff artifact](https://github.com/vishalkdotcom/skills/issues/7) — this ticket only decides **how** ctx% is read, not the ~50–60% threshold.
+Decision ticket: [Token-tracking instrumentation: prototype ctx% channels and decide](https://github.com/vishalkdotcom/skills/issues/12). Source of truth: `docs/research/ship-herdr-loop-102-validated-advice.md` §9 token-tracking paragraph. Serves [Session policy: per-role reuse, rotation threshold, handoff artifact](https://github.com/vishalkdotcom/skills/issues/7) — this ticket only decides **how** ctx% is read, not the ~50–60% threshold.
 
 ## Decision in one line
 
@@ -106,7 +106,7 @@ Throwaway occupant `ctxproto` on pane `w5:p4` was prompted once (`pong`) and had
 
 ## Sources
 
-- Advice doc `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` §9 (doc:83).
+- Advice doc `docs/research/ship-herdr-loop-102-validated-advice.md` §9 (doc:83).
 - [Session policy](https://github.com/vishalkdotcom/skills/issues/7) resolution + `docs/research/session-policy.md` on `research/session-policy`.
 - Live herdr `0.9.0-preview.2026-09-08`: `agent get/read/start/prompt`, `pane get/run/report-metadata/process-info`.
 - Cursor CLI statusline spec (`~/.cursor/skills-cursor/statusline/SKILL.md`): payload `session_id`, `context_window.used_percentage` / `total_input_tokens` / `context_window_size`; command spawned per update; `timeoutMs` 2000; kill on next update.

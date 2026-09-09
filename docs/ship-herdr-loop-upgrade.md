@@ -2,6 +2,8 @@
 
 Apply the validated #102 autopsy advice (items 1–7, plus item 9's session-budget policy and token-tracking instrumentation) to the `skills/ship*` files. Execute top to bottom. Each item names its decision ticket (detail lives there), the exact file changes, and a done-when tied to the failure it kills.
 
+This spec is the execution source. The autopsy itself is frozen at `docs/research/ship-herdr-loop-102-validated-advice.md` (line-cited by the research files). Do not edit that blob, and do not implement from its "Final advice."
+
 Verbatim replacement texts live in `docs/research/<name>.md` on `main`. Each item below points at its file.
 
 ## Preconditions (already done — verify, do not redo)

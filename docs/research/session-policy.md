@@ -1,6 +1,6 @@
 # Research: Session policy — per-role reuse, rotation threshold, handoff artifact (ticket #7)
 
-Decision ticket: `vishalkdotcom/skills#7`. Source of truth: `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md` ("advice doc", cited by line), final advice items 5 and 9. Prerequisites: #5 (Log schema, `docs/research/progress-file.md` on `research/progress-file`) and #6 (slot set, `docs/research/prompt-slots.md` on `research/prompt-slots`), which deferred the `Handoff:` slot here.
+Decision ticket: `vishalkdotcom/skills#7`. Source of truth: `docs/research/ship-herdr-loop-102-validated-advice.md` ("advice doc", cited by line), final advice items 5 and 9. Prerequisites: #5 (Log schema, `docs/research/progress-file.md` on `research/progress-file`) and #6 (slot set, `docs/research/prompt-slots.md` on `research/prompt-slots`), which deferred the `Handoff:` slot here.
 
 ## Decision in one line
 
@@ -54,7 +54,7 @@ Plus one orchestrator rule appended to prompt.md's rules list:
 
 ## Sources
 
-- Advice doc `awesomeapps/docs/agent/ship-herdr-loop-102-validated-advice.md`: final advice item 5 (doc:74); §9 (doc:79–84); Herdr validation (doc:25, 27); methodology-attribution correction on compaction (doc:64); #102 autopsy fix-pass observation (doc:81).
+- Advice doc `docs/research/ship-herdr-loop-102-validated-advice.md`: final advice item 5 (doc:74); §9 (doc:79–84); Herdr validation (doc:25, 27); methodology-attribution correction on compaction (doc:64); #102 autopsy fix-pass observation (doc:81).
 - Sibling findings: `docs/research/progress-file.md` on `research/progress-file` (#5, Log schema — what the progress file does and does not carry); `docs/research/prompt-slots.md` on `research/prompt-slots` (#6, slot set + deferred `Handoff:` slot + `Clear: Findings` verbatim-quoting rule).
 - Repo: `skills/ship-herdr/SKILL.md:20` (current session parenthetical this section replaces), `skills/ship-herdr/SKILL.md:24` (progress file as completion boundary), `skills/ship/SKILL.md:25,28` (new review when diff changed).
 - Handoff skill: `C:\Users\Vishal\.agents\skills\handoff\SKILL.md` (full file, 16 lines).
